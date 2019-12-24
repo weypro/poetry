@@ -1,0 +1,6 @@
+{
+  "usingComponents": {
+    "sqlite-d-b": "/components/sqliteDB"
+  },
+  "component": true
+}

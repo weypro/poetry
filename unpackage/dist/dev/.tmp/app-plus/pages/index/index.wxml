@@ -1,0 +1,1 @@
+<view><show-poetry vue-id="1" bind:__l="__l"></show-poetry></view>

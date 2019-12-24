@@ -1,0 +1,45 @@
+{
+  "pages": [
+    "pages/index/index",
+    "pages/more/more",
+    "pages/about/about",
+    "pages/datamanage/datamanage"
+  ],
+  "window": {
+    "navigationBarTextStyle": "black",
+    "navigationBarTitleText": "一句诗词",
+    "navigationBarBackgroundColor": "#F8F8F8",
+    "backgroundColor": "#FFFFFF"
+  },
+  "tabBar": {
+    "color": "#C0C0C0",
+    "selectedColor": "#000000",
+    "borderStyle": "white",
+    "backgroundColor": "#ffffff",
+    "list": [
+      {
+        "pagePath": "pages/index/index",
+        "iconPath": "static/home.png",
+        "selectedIconPath": "static/home.png",
+        "text": "首页"
+      },
+      {
+        "pagePath": "pages/more/more",
+        "iconPath": "static/more.png",
+        "selectedIconPath": "static/more.png",
+        "text": "更多"
+      }
+    ]
+  },
+  "nvueCompiler": "uni-app",
+  "renderer": "auto",
+  "splashscreen": {
+    "alwaysShowBeforeRender": true,
+    "autoclose": false
+  },
+  "appname": "poetry",
+  "compilerVersion": "2.3.7",
+  "usingComponents": {
+    "sqlite-d-b": "/components/sqliteDB"
+  }
+}

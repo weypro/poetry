@@ -1,0 +1,1 @@
+<view><sqlite-d-b class="vue-ref" vue-id="1" data-ref="sqlite" bind:__l="__l"></sqlite-d-b><uni-list vue-id="2" bind:__l="__l" vue-slots="{{['default']}}"><block wx:for="{{list}}" wx:for-item="item" wx:for-index="index" wx:key="index"><uni-list-item vue-id="{{('3-'+index)+','+('2')}}" title="{{item.line}}" bind:__l="__l"></uni-list-item></block></uni-list></view>

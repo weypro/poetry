@@ -1,0 +1,1 @@
+<view><uni-list vue-id="1" bind:__l="__l" vue-slots="{{['default']}}"><uni-list-item vue-id="{{('2')+','+('1')}}" title="管理数据" bind:__l="__l"></uni-list-item><navigator url="../about/about" hover-class="navigator-hover"><uni-list-item vue-id="{{('3')+','+('1')}}" title="关于" bind:__l="__l"></uni-list-item></navigator></uni-list></view>

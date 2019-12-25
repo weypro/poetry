@@ -1173,13 +1173,29 @@ function gz$gwx_7(){
 if( __WXML_GLOBAL__.ops_cached.$gwx_7)return __WXML_GLOBAL__.ops_cached.$gwx_7
 __WXML_GLOBAL__.ops_cached.$gwx_7=[];
 (function(z){var a=11;function Z(ops){z.push(ops)}
-Z([3,'欢迎使用 一句诗词！\n 版本：0.1    By wey'])
+Z([3,'欢迎使用 一句诗词！\n 版本：0.2    By wey\n'])
+Z([3,'版本说明：\n'])
+Z([3,'添加管理数据的显示功能\n'])
 })(__WXML_GLOBAL__.ops_cached.$gwx_7);return __WXML_GLOBAL__.ops_cached.$gwx_7
 }
 function gz$gwx_8(){
 if( __WXML_GLOBAL__.ops_cached.$gwx_8)return __WXML_GLOBAL__.ops_cached.$gwx_8
 __WXML_GLOBAL__.ops_cached.$gwx_8=[];
 (function(z){var a=11;function Z(ops){z.push(ops)}
+Z([3,'__l'])
+Z([3,'vue-ref'])
+Z([3,'sqlite'])
+Z([3,'1'])
+Z(z[0])
+Z([3,'2'])
+Z([[4],[[5],[1,'default']]])
+Z([3,'index'])
+Z([3,'item'])
+Z([[7],[3,'list']])
+Z(z[7])
+Z(z[0])
+Z([[6],[[7],[3,'item']],[3,'line']])
+Z([[2,'+'],[[2,'+'],[[2,'+'],[1,'3-'],[[7],[3,'index']]],[1,',']],[1,'2']])
 })(__WXML_GLOBAL__.ops_cached.$gwx_8);return __WXML_GLOBAL__.ops_cached.$gwx_8
 }
 function gz$gwx_9(){
@@ -1195,16 +1211,27 @@ if( __WXML_GLOBAL__.ops_cached.$gwx_10)return __WXML_GLOBAL__.ops_cached.$gwx_10
 __WXML_GLOBAL__.ops_cached.$gwx_10=[];
 (function(z){var a=11;function Z(ops){z.push(ops)}
 Z([3,'__l'])
+Z([3,'vue-ref'])
+Z([3,'sqlite'])
 Z([3,'1'])
+Z(z[0])
+Z([3,'2'])
 Z([[4],[[5],[1,'default']]])
+Z([3,'navigator-hover'])
+Z([3,'../datamanage/datamanage'])
 Z(z[0])
 Z([3,'管理数据'])
-Z([[2,'+'],[[2,'+'],[1,'2'],[1,',']],[1,'1']])
-Z([3,'navigator-hover'])
+Z([[2,'+'],[[2,'+'],[1,'3'],[1,',']],[1,'2']])
+Z(z[0])
+Z([3,'__e'])
+Z([[4],[[5],[[4],[[5],[[5],[1,'^click']],[[4],[[5],[[4],[[5],[1,'deleteAllData']]]]]]]]])
+Z([3,'一键清空'])
+Z([[2,'+'],[[2,'+'],[1,'4'],[1,',']],[1,'2']])
+Z(z[7])
 Z([3,'../about/about'])
 Z(z[0])
 Z([3,'关于'])
-Z([[2,'+'],[[2,'+'],[1,'3'],[1,',']],[1,'1']])
+Z([[2,'+'],[[2,'+'],[1,'5'],[1,',']],[1,'2']])
 })(__WXML_GLOBAL__.ops_cached.$gwx_10);return __WXML_GLOBAL__.ops_cached.$gwx_10
 }
 __WXML_GLOBAL__.ops_set.$gwx=z;
@@ -1389,6 +1416,14 @@ var aRB=_n('text')
 var tSB=_oz(z,0,e,s,gg)
 _(aRB,tSB)
 _(lQB,aRB)
+var eTB=_n('text')
+var bUB=_oz(z,1,e,s,gg)
+_(eTB,bUB)
+_(lQB,eTB)
+var oVB=_n('text')
+var xWB=_oz(z,2,e,s,gg)
+_(oVB,xWB)
+_(lQB,oVB)
 _(r,lQB)
 return r
 }
@@ -1396,34 +1431,53 @@ e_[x[6]]={f:m6,j:[],i:[],ti:[],ic:[]}
 d_[x[7]]={}
 var m7=function(e,s,r,gg){
 var z=gz$gwx_8()
-var bUB=_n('view')
-_(r,bUB)
+var fYB=_n('view')
+var cZB=_mz(z,'sqlite-d-b',['bind:__l',0,'class',1,'data-ref',1,'vueId',2],[],e,s,gg)
+_(fYB,cZB)
+var h1B=_mz(z,'uni-list',['bind:__l',4,'vueId',1,'vueSlots',2],[],e,s,gg)
+var o2B=_v()
+_(h1B,o2B)
+var c3B=function(l5B,o4B,a6B,gg){
+var e8B=_mz(z,'uni-list-item',['bind:__l',11,'title',1,'vueId',2],[],l5B,o4B,gg)
+_(a6B,e8B)
+return a6B
+}
+o2B.wxXCkey=4
+_2z(z,9,c3B,e,s,gg,o2B,'item','index','index')
+_(fYB,h1B)
+_(r,fYB)
 return r
 }
 e_[x[7]]={f:m7,j:[],i:[],ti:[],ic:[]}
 d_[x[8]]={}
 var m8=function(e,s,r,gg){
 var z=gz$gwx_9()
-var xWB=_n('view')
-var oXB=_mz(z,'show-poetry',['bind:__l',0,'vueId',1],[],e,s,gg)
-_(xWB,oXB)
-_(r,xWB)
+var o0B=_n('view')
+var xAC=_mz(z,'show-poetry',['bind:__l',0,'vueId',1],[],e,s,gg)
+_(o0B,xAC)
+_(r,o0B)
 return r
 }
 e_[x[8]]={f:m8,j:[],i:[],ti:[],ic:[]}
 d_[x[9]]={}
 var m9=function(e,s,r,gg){
 var z=gz$gwx_10()
-var cZB=_n('view')
-var h1B=_mz(z,'uni-list',['bind:__l',0,'vueId',1,'vueSlots',1],[],e,s,gg)
-var o2B=_mz(z,'uni-list-item',['bind:__l',3,'title',1,'vueId',2],[],e,s,gg)
-_(h1B,o2B)
-var c3B=_mz(z,'navigator',['hoverClass',6,'url',1],[],e,s,gg)
-var o4B=_mz(z,'uni-list-item',['bind:__l',8,'title',1,'vueId',2],[],e,s,gg)
-_(c3B,o4B)
-_(h1B,c3B)
-_(cZB,h1B)
-_(r,cZB)
+var fCC=_n('view')
+var cDC=_mz(z,'sqlite-d-b',['bind:__l',0,'class',1,'data-ref',1,'vueId',2],[],e,s,gg)
+_(fCC,cDC)
+var hEC=_mz(z,'uni-list',['bind:__l',4,'vueId',1,'vueSlots',2],[],e,s,gg)
+var oFC=_mz(z,'navigator',['hoverClass',7,'url',1],[],e,s,gg)
+var cGC=_mz(z,'uni-list-item',['bind:__l',9,'title',1,'vueId',2],[],e,s,gg)
+_(oFC,cGC)
+_(hEC,oFC)
+var oHC=_mz(z,'uni-list-item',['bind:__l',12,'bind:click',1,'data-event-opts',2,'title',3,'vueId',4],[],e,s,gg)
+_(hEC,oHC)
+var lIC=_mz(z,'navigator',['hoverClass',17,'url',1],[],e,s,gg)
+var aJC=_mz(z,'uni-list-item',['bind:__l',19,'title',1,'vueId',2],[],e,s,gg)
+_(lIC,aJC)
+_(hEC,lIC)
+_(fCC,hEC)
+_(r,fCC)
 return r
 }
 e_[x[9]]={f:m9,j:[],i:[],ti:[],ic:[]}

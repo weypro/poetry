@@ -82,6 +82,18 @@
           }
         }
       },
+      "splashscreen": {
+        "android": {
+          "xhdpi": "static/launch.png",
+          "hdpi": "static/launch.png"
+        },
+        "ios": {
+          "iphone": {
+            "retina40": "static/launch.png",
+            "retina47": "static/launch.png"
+          }
+        }
+      },
       "google": {
         "permissions": [
           "<uses-permission android:name=\"android.permission.ACCESS_COARSE_LOCATION\"/>",

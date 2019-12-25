@@ -13,11 +13,9 @@
 		},
 		data() {
 			return {
-				title: 'Hello'
 			}
 		},
 		onLoad() {
-
 		},
 		onShow() {
 		},

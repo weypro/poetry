@@ -3,7 +3,8 @@
 		<sqliteDB ref="sqlite"></sqliteDB>
 		<view class="uni-padding-wrap uni-common-mt">
 			<view class="poetry-view">
-				<scroll-view scroll-y="true" show-scrollbar="true" class="poetry-view-content"><!-- class="poetry-view"-->
+				<scroll-view scroll-y="true" show-scrollbar="true" class="poetry-view-content">
+					<!-- class="poetry-view"-->
 					<text>{{ poetryText }}</text>
 				</scroll-view>
 				<view class="poetry-view-detail">
@@ -27,13 +28,12 @@ export default {
 			poetryOrigin: '',
 			poetryLine: '',
 			poetryDetail: '',
-			savBtnText: '存个档',
+			savBtnText: '存个档'
 		};
 	},
-	onLoad: function() {
-	},
+	onLoad: function() {},
 	mounted: function(e) {
-		console.log('fff');
+		console.log('show poetry component');
 		//刷新一下
 		this.refreshPoetry();
 		//启动前先测
@@ -62,8 +62,8 @@ export default {
 			this.$refs.sqlite.closeDB();
 		},
 		refreshPoetry: function(e) {
-			
 			this.savBtnStateChange(0);
+
 			uni.request({
 				url: 'https://v1.jinrishici.com/all.json',
 				data: {
@@ -91,7 +91,14 @@ export default {
 					//this.poetryText = 'f\nf\nf\nsdf\nawer\nasf\naewrfsdf\nadsf\naretwr\n';
 					this.poetryAuthor = res.data.author;
 					this.poetryOrigin = res.data.origin;
-					this.poetryDetail=this.poetryAuthor;
+					this.poetryDetail = this.poetryAuthor;
+				},
+				fail: res => {
+					uni.showToast({
+						title: '需要联网使用~',
+						duration: 2000,
+						'icon':'none'
+					});
 				}
 			});
 		}
@@ -115,15 +122,15 @@ export default {
 	flex-direction: column;
 	font-family: KaiTi;
 }
-.poetry-view-content{
+.poetry-view-content {
 	font-size: 70rpx;
 }
-.poetry-view-detail{
+.poetry-view-detail {
 	margin-top: 10px;
 	font-size: 50rpx;
 	text-align: right;
-	    justify-content: flex-end;
-	    flex-direction: row;
+	justify-content: flex-end;
+	flex-direction: row;
 }
 .poetry-btn {
 	margin-top: 20upx;
@@ -135,5 +142,4 @@ export default {
 .uni-padding-wrap {
 	padding: 0 12px;
 }
-
 </style>

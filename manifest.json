@@ -79,6 +79,18 @@
                         "spotlight@3x" : "unpackage/res/icons/120x120.png"
                     }
                 }
+            },
+            "splashscreen" : {
+                "android" : {
+                    "xhdpi" : "static/launch.png",
+                    "hdpi" : "static/launch.png"
+                },
+                "ios" : {
+                    "iphone" : {
+                        "retina40" : "static/launch.png",
+                        "retina47" : "static/launch.png"
+                    }
+                }
             }
         }
     },

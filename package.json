@@ -1,0 +1,15 @@
+{
+  "name": "poetry",
+  "version": "1.0.0",
+  "description": "说明：此乃uniapp试水之作。本项目调用开放接口获取诗词，并且显示和保存。",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/weypro/poetry.git"
+  },
+  "author": "weypro",
+  "dependencies": {
+  }
+}

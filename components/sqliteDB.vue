@@ -12,15 +12,19 @@ export default {
 	},
 	methods: {
 		openDB: function() {
-			plus.sqlite.openDatabase({
-				name: 'favor',
-				path: '_doc/favor.db',
-				success: function(e) {
-					console.log('openDatabase success!');
-				},
-				fail: function(e) {
-					console.log('openDatabase failed: ' + JSON.stringify(e));
-				}
+			return new Promise((resolve, reject) => {
+				plus.sqlite.openDatabase({
+					name: 'favor',
+					path: '_doc/favor.db',
+					success: function(e) {
+						console.log('openDatabase success!');
+						resolve(1);
+					},
+					fail: function(e) {
+						console.log('openDatabase failed: ' + JSON.stringify(e));
+						reject('cannot open database');
+					}
+				});
 			});
 		},
 		isOpen: function() {
@@ -54,99 +58,79 @@ export default {
 		},
 		clean: function() {
 			this.excuteSQL('drop table poetry');
-			this.init()
+			this.init();
 		},
-		excuteSQL: function(sql, callback) {
-			plus.sqlite.executeSql({
-				name: 'favor',
-				sql: sql,
-				success: function(e) {
-					console.log('executeSql success!');
-					try {
-						callback(1);
-					} catch (e) {
-						console.log('No callback');
+		excuteSQL: function(sql) {
+			return new Promise((resolve, reject) => {
+				plus.sqlite.executeSql({
+					name: 'favor',
+					sql: sql,
+					success: function(e) {
+						console.log('executeSql success!', e);
+						resolve(1);
+					},
+					fail: function(e) {
+						console.log('executeSql failed: ' + JSON.stringify(e));
+						reject(0);
 					}
-				},
-				fail: function(e) {
-					console.log('executeSql failed: ' + JSON.stringify(e));
-				}
+				});
 			});
 		},
-		isLineExisted: function(line) {
-			console.log('promise');
-			console.log(line);
-			plus.sqlite.selectSql({
-				name: 'favor',
-				sql: 'select 1 from poetry where line = "' + line + '" limit 1',
-				success: function(data) {
-					console.log('selectSql success: ', data);
-					try {
-						console.log('datajson:', data[0]['1']);
-						if (data[0]['1'] == 1) {
-							console.log('存在');
-							sqldb.isExisted = 1;
-							return 1;
-						}
-					} catch (e) {
-						console.log('exist err');
-						sqldb.isExisted = 0;
-						return 0;
+		selectSQL: function(sql) {
+			return new Promise((resolve, reject) => {
+				plus.sqlite.selectSql({
+					name: 'favor',
+					sql: sql,
+					success: data => {
+						console.log('selectSql success: ');
+						resolve(data);
+					},
+					fail: function(e) {
+						console.log('selectSql failed: ' + JSON.stringify(e));
+						reject(0);
 					}
-				},
-				fail: function(e) {
-					console.log('selectSql failed: ' + JSON.stringify(e));
-					sqldb.isExisted = 0;
+				});
+			});
+		},
+		isLineExisted: async function(line) {
+			return new Promise(async (resolve, reject) => {
+				console.log('目标诗句:', line);
+				var data = await this.selectSQL('select 1 from poetry where line = "' + line + '" limit 1');
+				console.log('selectSql success: ', data);
+				try {
+					console.log('datajson:', data[0]['1']);
+					if (data[0]['1'] == 1) {
+						console.log('存在');
+						resolve(1);
+					}
+				} catch (e) {
+					console.log('不存在');
+					resolve(0);
 				}
 			});
-			sqldb.isSelectReady = 1;
 		},
 		insertLine: async function(line, author, origin, callback) {
 			console.log('准备insert');
-			//var flag=await this.isLineExisted(line);await
-			this.isLineExisted(line);
-			console.log('等待结束');
+			var flag = await this.isLineExisted(line);
+			console.log('判断是否存在完成:', flag);
 
-			//这一部分非常蛇皮，原本想用await的，但是用不来？？？先凑合吧
-			this.timer = setInterval(() => {
-				//设置延迟执行
-				console.log(sqldb.isExisted);
-
-				if (!sqldb.isExisted) {
-					if (!this.isOpen()) this.openDB();
-					this.excuteSQL('insert into poetry (id,line,author,origin) values(null,"' + line + '","' + author + '","' + origin + '")', callback);
-					callback(1);
-					if (this.isOpen()) this.closeDB();
-					console.log('ok');
-					clearInterval(this.timer);
-				}
-				if (sqldb.isSelectReady) {
-					sqldb.isSelectReady = 0;
-					clearInterval(this.timer);
-				}
-			}, 50);
-			sqldb.isExisted = 0;
+			if (!flag) {
+				if (!this.isOpen()) this.openDB();
+				await this.excuteSQL('insert into poetry (id,line,author,origin) values(null,"' + line + '","' + author + '","' + origin + '")');
+				callback(1);
+				if (this.isOpen()) this.closeDB();
+				console.log('insert ok');
+			}
 		},
-		getAllData: function() {
-			console.log('hhh');
-			//清空
-			//sqldb.allPoetryList.length = 0;
-			//设置延迟执行
-			plus.sqlite.selectSql({
-				name: 'favor',
-				sql: 'select * from poetry',
-				success: function(data) {
-					console.log('selectSql success: ');
-					for (var i in data) {
-						console.log(data[i]);
-						sqldb.allPoetryList.push(data[i]);
-					}
-				},
-				fail: function(e) {
-					console.log('selectSql failed: ' + JSON.stringify(e));
-				}
-			});
-			console.log('end');
+		getAllData: async function() {
+			console.log('getAllData func start');
+			var data = await this.selectSQL('select * from poetry');
+			console.log('selectSql success: ');
+			for (var i in data) {
+				console.log(data[i]);
+				sqldb.allPoetryList.push(data[i]);
+			}
+			console.log('getAllData func end');
 			return sqldb.allPoetryList;
 		}
 	}

@@ -22,12 +22,12 @@
 				list: sqldb.allPoetryList
 			};
 		},
-		mounted: function(e) {
+		mounted: async function(e) {
 			this.showLoading();
 			//清空上次的记录
 			sqldb.allPoetryList.splice(0,sqldb.allPoetryList.length);
 			//获取新纪录
-			this.$refs.sqlite.openDB();
+			await this.$refs.sqlite.openDB();
 			this.$refs.sqlite.getAllData();
 			this.$refs.sqlite.closeDB();
 		},

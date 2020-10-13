@@ -2,24 +2,28 @@
 	<view>
 		<sqliteDB ref="sqlite"></sqliteDB>
 		<view class="uni-padding-wrap uni-common-mt">
-			<view class="poetry-view">
+			<view class="poetry-view Kaiti_font">
 				<scroll-view scroll-y="true" show-scrollbar="true" class="poetry-view-content">
-					<!-- class="poetry-view"-->
 					<text>{{ poetryText }}</text>
 				</scroll-view>
 				<view class="poetry-view-detail">
 					<text>{{ poetryDetail }}</text>
 				</view>
 			</view>
-			<view class="poetry-btn"><button type="default" plain="true" @click="refreshPoetry">换一句</button></view>
-			<view class="poetry-btn">
-				<button type="default" plain="true" @click="savePoetry">{{ savBtnText }}</button>
+			<view class="poetry-btn-wapper">
+				<waves><div class="poetry-btn" @click="refreshPoetry">换一句</div></waves>
+			</view>
+			<view class="poetry-btn-wapper">
+				<waves>
+					<div class="poetry-btn" @click="savePoetry">{{ savBtnText }}</div>
+				</waves>
 			</view>
 		</view>
 	</view>
 </template>
 
 <script>
+import waves from '@/components/xxley-waves/waves.vue';
 export default {
 	data() {
 		return {
@@ -31,15 +35,18 @@ export default {
 			savBtnText: '存个档'
 		};
 	},
+	components: {
+		waves
+	},
 	onLoad: function() {},
-	mounted: function(e) {
+	mounted: async function(e) {
 		console.log('show poetry component');
 		//刷新一下
 		this.refreshPoetry();
-		//启动前先测
-		this.$refs.sqlite.openDB();
+		//启动前先保证初始化
+		await this.$refs.sqlite.openDB();
 		//this.$refs.sqlite.clean();
-		//this.$refs.sqlite.init();
+		this.$refs.sqlite.init();
 		this.$refs.sqlite.closeDB();
 	},
 	methods: {
@@ -47,17 +54,8 @@ export default {
 			if (num == 1) this.savBtnText = '存档成功';
 			if (num == 0) this.savBtnText = '存个档';
 		},
-		savePoetry: function(e) {
-			this.$refs.sqlite.openDB();
-
-			/*
-			clearTimeout(this.timer);  //清除延迟执行 
-			this.timer = setTimeout(()=>{   //设置延迟执行
-			    this.$refs.sqlite.isOpen();
-				console.log('ok');
-			},2000);
-			*/
-			this.$refs.sqlite.isOpen();
+		savePoetry: async function(e) {
+			await this.$refs.sqlite.openDB();
 			this.$refs.sqlite.insertLine(this.poetryLine, this.poetryAuthor, this.poetryOrigin, this.savBtnStateChange);
 			this.$refs.sqlite.closeDB();
 		},
@@ -80,15 +78,7 @@ export default {
 						.replace(new RegExp('？', 'g'), '\n')
 						.replace(new RegExp('！', 'g'), '\n')
 						.replace(new RegExp('；', 'g'), '\n');
-					/*
-					if (tempString.indexOf('？') != -1) {
-						tempString = tempString.slice(0, tempString.indexOf('？')) + '？\n' + tempString.slice(tempString.indexOf('？') + 1);
-					}
-					if (tempString.indexOf('!') != -1) {
-						tempString = tempString.slice(0, tempString.indexOf('!')) + '!\n' + tempString.slice(tempString.indexOf('!') + 1);
-					}*/
 					this.poetryText = tempString;
-					//this.poetryText = 'f\nf\nf\nsdf\nawer\nasf\naewrfsdf\nadsf\naretwr\n';
 					this.poetryAuthor = res.data.author;
 					this.poetryOrigin = res.data.origin;
 					this.poetryDetail = this.poetryAuthor;
@@ -97,7 +87,7 @@ export default {
 					uni.showToast({
 						title: '需要联网使用~',
 						duration: 2000,
-						'icon':'none'
+						icon: 'none'
 					});
 				}
 			});
@@ -108,19 +98,18 @@ export default {
 
 <style lang="scss">
 .poetry-view {
-	margin-bottom: 50upx;
-	padding: 40upx 0;
+	margin-bottom: 50rpx;
+	padding: 40rpx 0;
 	display: flex;
-	height: 530upx;
+	height: 530rpx;
 	background-color: #ffffff;
 	justify-content: center;
 	align-items: center;
 	text-align: center;
-	font-size: 50upx;
+	font-size: 50rpx;
 	color: #353535;
 	line-height: 1.6;
 	flex-direction: column;
-	font-family: KaiTi;
 }
 .poetry-view-content {
 	font-size: 70rpx;
@@ -132,10 +121,30 @@ export default {
 	justify-content: flex-end;
 	flex-direction: row;
 }
-.poetry-btn {
+.poetry-btn-wapper {
 	margin-top: 20upx;
 	padding: 10px 40px;
 }
+
+.poetry-btn {
+	box-sizing: border-box; /*这个属性很重要*/
+	width: 100%;
+	align-items: center;
+	border: 1px solid transparent;
+	border-radius: 3px;
+	box-shadow: none;
+	display: inline-flex;
+	height: 46px;
+	vertical-align: top;
+	user-select: none;
+	background-color: #fff;
+	border-color: #dbdbdb;
+	color: #363636;
+	justify-content: center;
+	text-align: center;
+	white-space: nowrap;
+}
+
 .uni-common-mt {
 	margin-top: 12px;
 }

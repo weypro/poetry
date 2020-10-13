@@ -1,6 +1,8 @@
 # 一句诗词 poetry
 
-![Version](https://img.shields.io/github/tag/gnuradio/gnuradio.svg)
+![GPL](https://img.shields.io/github/license/weypro/poetry)
+![Version](https://img.shields.io/github/package-json/v/weypro/poetry)
+
 
 ## 说明
 此乃uniapp试水之作。本项目调用开放接口获取诗词，并且显示和保存。  

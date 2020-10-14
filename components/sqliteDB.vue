@@ -71,7 +71,7 @@ export default {
 					},
 					fail: function(e) {
 						console.log('executeSql failed: ' + JSON.stringify(e));
-						reject(0);
+						reject('cannot excute');
 					}
 				});
 			});
@@ -87,7 +87,7 @@ export default {
 					},
 					fail: function(e) {
 						console.log('selectSql failed: ' + JSON.stringify(e));
-						reject(0);
+						reject('cannot select');
 					}
 				});
 			});
@@ -98,6 +98,7 @@ export default {
 				var data = await this.selectSQL('select 1 from poetry where line = "' + line + '" limit 1');
 				console.log('selectSql success: ', data);
 				try {
+					//返回的data是数组
 					console.log('datajson:', data[0]['1']);
 					if (data[0]['1'] == 1) {
 						console.log('存在');
@@ -112,7 +113,7 @@ export default {
 		insertLine: async function(line, author, origin, callback) {
 			console.log('准备insert');
 			var flag = await this.isLineExisted(line);
-			console.log('判断是否存在完成:', flag);
+			console.log('判断是否存在:', flag);
 
 			if (!flag) {
 				if (!this.isOpen()) this.openDB();
@@ -126,10 +127,10 @@ export default {
 			console.log('getAllData func start');
 			var data = await this.selectSQL('select * from poetry');
 			console.log('selectSql success: ');
-			for (var i in data) {
-				console.log(data[i]);
-				sqldb.allPoetryList.push(data[i]);
-			}
+			// for (var i in data) {
+			// 	console.log(data[i]);
+			// 	sqldb.allPoetryList.push(data[i]);
+			// }
 			console.log('getAllData func end');
 			return sqldb.allPoetryList;
 		}
